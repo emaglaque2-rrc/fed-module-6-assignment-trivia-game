@@ -11,6 +11,30 @@ document.addEventListener("DOMContentLoaded", function () {
 	fetchQuestions();
 	displayScores();
 
+    /**
+     * 
+     * @param {string} name - The cookie key
+     * @param {Any} value - The data that will be stored in the cookie 
+     * @param {Number} days - The cookie's expiration days
+     */
+    function setCookie(name, value, days) {
+    let expiration = "";
+
+    // if days is undefined, do not add to the expiration string
+    if (days) {
+        const date = new Date();
+        // get the current time, and add a number of milliseconds to it
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+
+        expiration = `; expires=${date.toUTCString()}`;
+    }
+
+    // either create a new cookie (if the name is not taken) or replace it if it is
+    document.cookie = `${name}=${value}${expiration}`;
+    }
+
+
+
 	/**
 	 * Fetches trivia questions from the API and displays them.
 	 */
