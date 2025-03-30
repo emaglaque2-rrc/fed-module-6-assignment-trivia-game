@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	displayScores();
 
     /**
-     * 
+     * Sets cookie with specife name, value, and expiration days.
      * @param {string} name - The cookie key
-     * @param {Any} value - The data that will be stored in the cookie 
+     * @param {Any} value - The data that will be stored in the cookie
      * @param {Number} days - The cookie's expiration days
      */
     function setCookie(name, value, days) {
@@ -33,6 +33,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.cookie = `${name}=${value}${expiration}`;
     }
 
+    /**
+     * Retrieves the value of the cookie that it's passed to.
+     * @param {string} name - The cookie key
+     * @returns {string} returns value of the cookie.
+     */
+    function getCookie(name) {
+        return document.cookie
+        .split("; ")
+        .find(str => {return str.startsWith(`${name}=`)})
+        ?.split("=")[1];
+    }
 
 
 	/**
