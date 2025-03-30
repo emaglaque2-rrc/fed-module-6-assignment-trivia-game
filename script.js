@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const form = document.getElementById("trivia-form");
 	const questionContainer = document.getElementById("question-container");
 	const newPlayerButton = document.getElementById("new-player");
+    const usernameInput = document.getElementById("username");
 
 	// Initialize the game
 	// checkUsername(); Uncomment once completed
@@ -43,6 +44,23 @@ document.addEventListener("DOMContentLoaded", function () {
         .split("; ")
         .find(str => {return str.startsWith(`${name}=`)})
         ?.split("=")[1];
+    }
+
+    /**
+     * Checks for the presence of a username cookie.
+     */
+    function checkUsername() {
+        const username = getCookie("username");
+
+        if (username !== "") {
+            usernameInput.value = username;
+            usernameInput.disabled = true;
+            newPlayerButton.classList.remove("hidden");
+        } else {
+            usernameInput.value = "";
+            usernameInput.disabled = false;
+            newPlayerButton.classList.add("hidden");
+        }
     }
 
 
