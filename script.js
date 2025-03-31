@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	const questionContainer = document.getElementById("question-container");
 	const newPlayerButton = document.getElementById("new-player");
     const usernameInput = document.getElementById("username");
+    const usernameLabelNode = document.getElementById("username-label");
     const feedbackMessageNode = document.getElementById("feedback-message");
 
 	// Initialize the game
@@ -66,10 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (username !== "") {
             usernameInput.value = username;
             usernameInput.classList.add("hidden");
+            usernameLabelNode.classList.add("hidden");
             newPlayerButton.classList.remove("hidden");
         } else {
             usernameInput.value = "";
             usernameInput.classList.remove("hidden");
+            usernameLabelNode.classList.remove("hidden");
             newPlayerButton.classList.add("hidden");
         }
     }
@@ -167,7 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		event.preventDefault();
 		//... form submission logic including setting cookies and calculating score
         // Using trim on the username input because the leading spaces might cause issues
-        // with the way the cookie gets broken down. 
+        // with the way the cookie gets broken down.
+        feedbackMessageNode.textContent = "";
         let username = usernameInput.value.trim();
         if (username === "") {
             // some error handling

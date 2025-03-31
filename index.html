@@ -9,33 +9,37 @@
 		<div id="game-container">
 			<form id="trivia-form">
                 <fieldset>
-                    <legend>Trivia game</legend>
+                    <legend>Trivia Questions</legend>
+                    <!-- Loading State / Skeleton Loader -->
+                    <div id="loading-container" class="hidden">
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                        <div class="skeleton skeleton-option"></div>
+                    </div>
                     <div id="question-container" class="hidden"></div>
-                    <label for="username">Username</label>
-				<input
-					type="text"
-					id="username"
-					placeholder="Enter your name"
-				/>
-				<input type="submit" id="submit-game" value="Finish Game"></input>
-                <input type="button" id="new-player" class="hidden" value="New Player"></input>
-                <span id="feedback-message" class="feedback-message"></span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Button Group</legend>
+                    <label for="username" id="username-label">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter your name"
+                    />
+                    <input type="submit" id="submit-game" value="Finish Game"></input>
+                    <input type="button" id="new-player" class="hidden" value="New Player"></input>
+                    <span id="feedback-message" class="feedback-message"></span>
                 </fieldset>
 			</form>
-            
-				<!-- Loading State / Skeleton Loader -->
-				<div id="loading-container" class="hidden">
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-					<div class="skeleton skeleton-option"></div>
-				</div>
+
 
 			<table id="score-table">
 				<thead>
