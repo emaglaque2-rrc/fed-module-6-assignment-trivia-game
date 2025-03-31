@@ -6,11 +6,22 @@ document.addEventListener("DOMContentLoaded", function () {
 	const questionContainer = document.getElementById("question-container");
 	const newPlayerButton = document.getElementById("new-player");
     const usernameInput = document.getElementById("username");
+    const feedbackMessageNode = document.getElementById("feedback-message");
 
 	// Initialize the game
 	// checkUsername(); Uncomment once completed
 	fetchQuestions();
 	// displayScores(); Uncomment once completed
+
+    /**
+     * 
+     * @param {string} message - The error message to be displayed to the user.
+     */
+    function errorDisplay(message) {
+        feedbackMessageNode.setAttribute("role", "alert");
+        feedbackMessageNode.textContent = message;
+    }
+
 
     /**
      * Sets cookie with specife name, value, and expiration days.
@@ -160,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let username = usernameInput.value.trim();
         if (username === "") {
             // some error handling
-            console.log("empty username thing working")
+            errorDisplay("empty username thing working")
             return;
         }
 
