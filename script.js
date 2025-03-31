@@ -156,5 +156,23 @@ document.addEventListener("DOMContentLoaded", function () {
 	function handleFormSubmit(event) {
 		event.preventDefault();
 		//... form submission logic including setting cookies and calculating score
+        // Using trim on the username input because the leading spaces might cause issues
+        // with the way the cookie gets broken down. 
+        let username = usernameInput.value.trim();
+        if (username === "") {
+            // some error handling
+        }
+
+        if (getCookie("username") !== username) {
+            setCookie("username", username, 7);
+            checkUsername()
+        }
+
+        // PLACEHOLDERS
+        calculateScore();
+        saveScore();
+        displayScores();
+
+        fetchQuestions();
 	}
 });
