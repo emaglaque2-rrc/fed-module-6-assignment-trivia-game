@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
 	/**
 	 * Fetches trivia questions from the API and displays them.
 	 */

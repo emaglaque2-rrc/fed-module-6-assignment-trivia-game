@@ -85,7 +85,16 @@ input[type="radio"] {
 	margin-bottom: 0.9375rem;
 }
 
-button {
+#submit-game {
+	color: white;
+	border: none;
+	padding: 0.625rem 1.25rem;
+	border-radius: 0.3125rem;
+	cursor: pointer;
+	font-size: 1rem;
+}
+
+#new-player{
 	color: white;
 	border: none;
 	padding: 0.625rem 1.25rem;
