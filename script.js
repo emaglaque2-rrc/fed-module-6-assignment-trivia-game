@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Initialize the game
 	// checkUsername(); Uncomment once completed
 	fetchQuestions();
-	displayScores();
+	// displayScores(); Uncomment once completed
 
     /**
      * Sets cookie with specife name, value, and expiration days.
@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (username !== "") {
             usernameInput.value = username;
-            usernameInput.disabled = true;
+            usernameInput.classList.add("hidden");
             newPlayerButton.classList.remove("hidden");
         } else {
             usernameInput.value = "";
-            usernameInput.disabled = false;
+            usernameInput.classList.remove("hidden");
             newPlayerButton.classList.add("hidden");
         }
     }
@@ -161,18 +161,21 @@ document.addEventListener("DOMContentLoaded", function () {
         let username = usernameInput.value.trim();
         if (username === "") {
             // some error handling
+            console.log("empty username thing working")
+            return;
         }
 
         if (getCookie("username") !== username) {
             setCookie("username", username, 7);
-            checkUsername()
+            checkUsername();
+            console.log(document.cookie);
         }
 
         // PLACEHOLDERS
-        calculateScore();
-        saveScore();
-        displayScores();
+        // calculateScore();
+        // saveScore();
+        // displayScores();
 
-        fetchQuestions();
+        // fetchQuestions();
 	}
 });
