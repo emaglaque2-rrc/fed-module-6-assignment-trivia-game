@@ -146,13 +146,16 @@ document.addEventListener("DOMContentLoaded", function () {
 		);
 		return allAnswers
 			.map(
-				(answer) => `
-            <label>
-                <input type="radio" name="answer${questionIndex}" value="${answer}" ${
-					answer === correctAnswer ? 'data-correct="true"' : ""
-				}>
-                ${answer}
-            </label>
+				(answer, answerIndex) => `
+                <div>
+                    <input type="radio" id="radio-question-${questionIndex}-answer-${answerIndex}"
+                    name="answer${questionIndex}" value="${answer}" ${
+                        answer === correctAnswer ? 'data-correct="true"' : ""
+                    }>
+                    <label for="radio-question-${questionIndex}-answer-${answerIndex}">
+                    ${answer}
+                    </label>
+                </div>
         `
 			)
 			.join("");

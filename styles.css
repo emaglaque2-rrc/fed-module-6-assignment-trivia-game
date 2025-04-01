@@ -69,7 +69,7 @@ body {
 }
 
 label {
-	display: block;
+	display: inline-block;
 	margin: 0.3125rem 0;
 	cursor: pointer;
 }
