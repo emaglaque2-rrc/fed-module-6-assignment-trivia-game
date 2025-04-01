@@ -77,6 +77,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function calculateScore() {
+        let score = 0;
+        const questions = questionContainer.querySelectorAll(".question");
+
+        questions.forEach((questionDivElement) =>{
+            // CITATION: https://stackoverflow.com/questions/63564351/what-is-the-right-way-to-select-input-type-radio-in-dom
+            const selectedAnswer = questionDivElement.querySelector("input[type='radio']:checked");
+            if (selectedAnswer && selectedAnswer.hasAttribute("data-correct")) {
+                score++
+            }
+        });
+
+        return score;
+    }
+
 	/**
 	 * Fetches trivia questions from the API and displays them.
 	 */
@@ -117,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		questionContainer.innerHTML = ""; // Clear existing questions
 		questions.forEach((question, index) => {
 			const questionDiv = document.createElement("div");
+            questionDiv.classList.add("question")
 			questionDiv.innerHTML = `
                 <p>${question.question}</p>
                 ${createAnswerOptions(
@@ -147,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		return allAnswers
 			.map(
 				(answer, answerIndex) => `
-                <div>
+                <div class="answer">
                     <input type="radio" id="radio-question-${questionIndex}-answer-${answerIndex}"
                     name="answer${questionIndex}" value="${answer}" ${
                         answer === correctAnswer ? 'data-correct="true"' : ""
@@ -189,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // PLACEHOLDERS
-        // calculateScore();
+        console.log(calculateScore());
         // saveScore();
         // displayScores();
 
