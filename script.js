@@ -77,6 +77,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    /**
+     * Calculates user's score based on their answers.
+     * @returns {Number} User's score
+     */
     function calculateScore() {
         let score = 0;
         const questions = questionContainer.querySelectorAll(".question");
@@ -91,6 +95,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return score;
     }
+
+    // 7. SCORE PERSISTENCE ***************
+
+    /**
+     * Saves user's score to localStorage
+     * @param {string} username - Player's username
+     * @param {Number} score - Player's score to be saved
+     */
+    function saveScore(username, score) {
+    // either gets existng object or initializes an empty object
+    let scoreData = JSON.parse(localStorage.getItem("userScores")) || {};
+    
+    // initialize user's score array if it doesn't exist
+    if (!scoreData[username]) {
+        scoreData[username] = [];
+    }
+    
+    // add the new score to the user's array, this lets see their previous scores too
+    scoreData[username].push(score);
+    
+    localStorage.setItem("userScores", JSON.stringify(scoreData));
+    console.log(JSON.parse(localStorage.getItem("userScores")))
+    }
+
 
 	/**
 	 * Fetches trivia questions from the API and displays them.
@@ -205,8 +233,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // PLACEHOLDERS
-        console.log(calculateScore());
-        // saveScore();
+        //console.log(calculateScore());
+        const score = calculateScore();
+        saveScore(username, score);
         // displayScores();
 
         // fetchQuestions();
