@@ -97,8 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return score;
     }
 
-    // 7. SCORE PERSISTENCE ***************
-
     /**
      * Saves user's score to localStorage
      * @param {string} username - Player's username

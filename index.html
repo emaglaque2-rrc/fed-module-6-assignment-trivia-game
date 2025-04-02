@@ -6,53 +6,62 @@
 		<link rel="stylesheet" href="./styles.css" />
 	</head>
 	<body>
-		<div id="game-container">
-			<form id="trivia-form">
-                <fieldset>
-                    <legend>Trivia Questions</legend>
-                    <!-- Loading State / Skeleton Loader -->
-                    <div id="loading-container" class="hidden">
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                        <div class="skeleton skeleton-option"></div>
-                    </div>
-                    <div id="question-container" class="hidden"></div>
-                </fieldset>
+        <header>
+            <h1>Trivia Game</h1>
+        </header>
 
-                <fieldset>
-                    <legend>Button Group</legend>
-                    <label for="username" id="username-label">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        placeholder="Enter your name"
-                    />
-                    <input type="submit" id="submit-game" value="Finish Game"></input>
-                    <input type="button" id="new-player" class="hidden" value="New Player"></input>
-                    <span id="feedback-message" class="feedback-message"></span>
-                </fieldset>
-			</form>
+        <main>
 
+            <div id="game-container">
+                <form id="trivia-form">
+                    <fieldset>
+                        <legend>Trivia Questions</legend>
+                        <!-- Loading State / Skeleton Loader -->
+                        <div id="loading-container" class="hidden">
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                            <div class="skeleton skeleton-option"></div>
+                        </div>
+                        <div id="question-container" class="hidden"></div>
+                    </fieldset>
+    
+                    <fieldset>
+                        <legend>Button Group</legend>
+                        <label for="username" id="username-label">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Enter your name"
+                        />
+                        <input type="submit" id="submit-game" value="Finish Game"></input>
+                        <input type="button" id="new-player" class="hidden" value="New Player"></input>
+                        <span id="feedback-message" class="feedback-message"></span>
+                    </fieldset>
+                </form>
+    
+    
+                <table id="score-table">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Scores will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
 
-			<table id="score-table">
-				<thead>
-					<tr>
-						<th>Player</th>
-						<th>Score</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- Scores will be inserted here -->
-				</tbody>
-			</table>
-		</div>
+        </main>
+
 		<script src="./script.js"></script>
 	</body>
 </html>
