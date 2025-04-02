@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	const form = document.getElementById("trivia-form");
 	const questionContainer = document.getElementById("question-container");
 	const newPlayerButton = document.getElementById("new-player");
-    const usernameInput = document.getElementById("username");
+    const usernameInputNode = document.getElementById("username");
     const usernameLabelNode = document.getElementById("username-label");
     const feedbackMessageNode = document.getElementById("feedback-message");
+    const scoreTableBodyNode = document.querySelector("#score-table tbody");
 
 	// Initialize the game
 	// checkUsername(); Uncomment once completed
@@ -65,13 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const username = getCookie("username");
 
         if (username !== "") {
-            usernameInput.value = username;
-            usernameInput.classList.add("hidden");
+            usernameInputNode.value = username;
+            usernameInputNode.classList.add("hidden");
             usernameLabelNode.classList.add("hidden");
             newPlayerButton.classList.remove("hidden");
         } else {
-            usernameInput.value = "";
-            usernameInput.classList.remove("hidden");
+            usernameInputNode.value = "";
+            usernameInputNode.classList.remove("hidden");
             usernameLabelNode.classList.remove("hidden");
             newPlayerButton.classList.add("hidden");
         }
@@ -105,20 +106,49 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     function saveScore(username, score) {
     // either gets existng object or initializes an empty object
-    let scoreData = JSON.parse(localStorage.getItem("userScores")) || {};
+    // CITATION: https://stackoverflow.com/questions/20948372/what-does-means-in-javascript
+    let playersScoreData = JSON.parse(localStorage.getItem("userScores")) || {};
     
     // initialize user's score array if it doesn't exist
-    if (!scoreData[username]) {
-        scoreData[username] = [];
+    if (!playersScoreData[username]) {
+        playersScoreData[username] = [];
     }
-    
     // add the new score to the user's array, this lets see their previous scores too
-    scoreData[username].push(score);
+    // CITATION: https://www.w3schools.com/jsref/jsref_push.asp
+    playersScoreData[username].push(score);
     
-    localStorage.setItem("userScores", JSON.stringify(scoreData));
+    localStorage.setItem("userScores", JSON.stringify(playersScoreData));
     console.log(JSON.parse(localStorage.getItem("userScores")))
     }
 
+    /**
+     * Retrieves scores from ocalStorage and displays them on score table by creating elements in HTML.
+     */
+    function displayScores() {
+        scoreTableBodyNode.innerHTML = "";
+
+        playersScoreData = JSON.parse(localStorage.getItem("userScores"));
+
+        for (const username in playersScoreData) {
+            const scores = playersScoreData[username];
+            // CITATION: https://builtin.com/articles/javascript-get-last-element-of-array#:~:text=Square%20Bracket%20Notation-,To%20get%20the%20last%20element%20of%20an%20array%20in%20JavaScript,the%20element%20at%20that%20index.
+            const mostRecentScore = scores[scores.length - 1];
+
+            const row = document.createElement("tr");
+
+            // username display
+            const usernameCell = document.createElement("td");
+            usernameCell.textContent = username;
+            row.appendChild(usernameCell);
+
+            // score display
+            const scoreCell = document.createElement("td");
+            scoreCell.textContent = mostRecentScore;
+            row.appendChild(scoreCell);
+
+            scoreTableBodyNode.appendChild(row);
+        }
+    }
 
 	/**
 	 * Fetches trivia questions from the API and displays them.
@@ -219,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Using trim on the username input because the leading spaces might cause issues
         // with the way the cookie gets broken down.
         feedbackMessageNode.textContent = "";
-        let username = usernameInput.value.trim();
+        let username = usernameInputNode.value.trim();
         if (username === "") {
             // some error handling
             errorDisplay("empty username thing working")
@@ -233,10 +263,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // PLACEHOLDERS
-        //console.log(calculateScore());
         const score = calculateScore();
         saveScore(username, score);
-        // displayScores();
+        displayScores();
 
         // fetchQuestions();
 	}
