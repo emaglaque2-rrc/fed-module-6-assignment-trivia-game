@@ -9,11 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const usernameLabelNode = document.getElementById("username-label");
     const feedbackMessageNode = document.getElementById("feedback-message");
     const scoreTableBodyNode = document.querySelector("#score-table tbody");
+    const finishGameButtonNode = document.getElementById("submit-game");
 
 	// Initialize the game
-	// checkUsername(); Uncomment once completed
+	checkUsername();
 	fetchQuestions();
-	// displayScores(); Uncomment once completed
+	displayScores();
 
     /**
      * 
@@ -69,11 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
             usernameInputNode.value = username;
             usernameInputNode.classList.add("hidden");
             usernameLabelNode.classList.add("hidden");
+            finishGameButtonNode.classList.add("hidden");
             newPlayerButton.classList.remove("hidden");
         } else {
             usernameInputNode.value = "";
             usernameInputNode.classList.remove("hidden");
             usernameLabelNode.classList.remove("hidden");
+            finishGameButtonNode.classList.remove("hidden");
             newPlayerButton.classList.add("hidden");
         }
     }
@@ -244,10 +247,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	function handleFormSubmit(event) {
 		event.preventDefault();
 		//... form submission logic including setting cookies and calculating score
+
         // Using trim on the username input because the leading spaces might cause issues
         // with the way the cookie gets broken down.
         feedbackMessageNode.textContent = "";
         let username = usernameInputNode.value.trim();
+
         if (username === "") {
             // some error handling
             errorDisplay("empty username thing working")
@@ -264,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const score = calculateScore();
         saveScore(username, score);
         displayScores();
-
-        // fetchQuestions();
+        fetchQuestions();
 	}
+
 });
