@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkUsername() {
         const username = getCookie("username");
 
-        if (username !== "") {
+        if (username) {
             usernameInputNode.value = username;
             usernameInputNode.classList.add("hidden");
             usernameLabelNode.classList.add("hidden");
@@ -149,6 +149,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             scoreTableBodyNode.appendChild(row);
         }
+    }
+
+    /**
+     * Resets game for new player by updating the UI and clearing cookie.
+     */
+    function newPlayer() {
+        setCookie("username", "",-1);
+
+        checkUsername();
     }
 
 	/**
