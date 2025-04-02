@@ -17,16 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	displayScores();
 
     /**
-     * 
-     * @param {string} message - The error message to be displayed to the user.
-     */
-    function errorDisplay(message) {
-        feedbackMessageNode.setAttribute("role", "alert");
-        feedbackMessageNode.textContent = message;
-    }
-
-
-    /**
      * Sets cookie with specife name, value, and expiration days.
      * @param {string} name - The cookie key
      * @param {Any} value - The data that will be stored in the cookie
@@ -245,10 +235,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			.join("");
 	}
 
-	// Event listeners for form submission and new player button
-	form.addEventListener("submit", handleFormSubmit);
-	newPlayerButton.addEventListener("click", newPlayer);
-
 	/**
 	 * Handles the trivia form submission.
 	 * @param {Event} event - The submit event.
@@ -260,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Using trim on the username input because the leading spaces might cause issues
         // with the way the cookie gets broken down.
         feedbackMessageNode.textContent = "";
-        let username = usernameInputNode.value.trim();
+        let username = escapeHTML(usernameInputNode.value.trim());
 
         if (username === "") {
             // some error handling
@@ -281,4 +267,27 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchQuestions();
 	}
 
+    // Event listeners for form submission and new player button
+	form.addEventListener("submit", handleFormSubmit);
+	newPlayerButton.addEventListener("click", newPlayer);
+
+    // HELPER FUNCTIONS
+
+    /**
+     * Displays an error message in the UI to notify users.
+     * @param {string} message - The error message to be displayed to the user.
+     */
+    function errorDisplay(message) {
+        feedbackMessageNode.setAttribute("role", "alert");
+        feedbackMessageNode.textContent = message;
+    }
+
+    function escapeHTML(input) {
+        return input
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 });
