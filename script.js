@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
             playersScoreData[username].push(score);
             
             localStorage.setItem("userScores", JSON.stringify(playersScoreData));
-            console.log(JSON.parse(localStorage.getItem("userScores")))
+            // TEST PURPOSES: console.log(JSON.parse(localStorage.getItem("userScores")))
         } catch (error) {
             errorDisplay("Failed to save score. Please refresh.");
             throw new Error("Failed to save score: " + error);
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch((error) => {
                 console.error("Error fetching questions:", error);
                 showLoading(false); // Hide loading state on error
-                errorDisplay("Failed to load questions. Please try again later.");
+                errorDisplay("Failed to load questions. Please refresh!");
             });
 	}
 
@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (getCookie("username") !== username) {
                 setCookie("username", username, 7);
                 checkUsername();
-                console.log(document.cookie);
+                // TEST PURPOSES: (document.cookie);
             }
     
             // PLACEHOLDERS
